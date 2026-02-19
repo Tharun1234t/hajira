@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Friendship Forever!💖</title>
+
+<style>
+:root{ 
+  --bg1:#ff758c;
+  --bg2:#ff7eb3;
+  --glass:rgba(255,255,255,0.15);
+  --text:#fff;
+}
+
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:linear-gradient(135deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  overflow:hidden;
+  transition:0.4s;
+}
+
+/* Background Pulse */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at center,rgba(255,255,255,0.1),transparent 70%);
+  animation:pulseBg 6s infinite;
+  z-index:-1;
+}
+@keyframes pulseBg{
+  0%{opacity:0.3;}
+  50%{opacity:0.6;}
+  100%{opacity:0.3;}
+}
+
+.dark{
+  --bg1:#141e30;
+  --bg2:#243b55;
+  --glass:rgba(255,255,255,0.08);
+}
+
+.container{
+  width:100%;
+  max-width:900px;
+  text-align:center;
+}
+
+.card{
+  background:var(--glass);
+  backdrop-filter:blur(20px);
+  border-radius:25px;
+  padding:30px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.3);
+  animation:fade 0.6s ease;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(30px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+nav{ margin-bottom:20px; }
+
+nav button{
+  margin:5px;
+  padding:8px 14px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  background:rgba(255,255,255,0.2);
+  color:white;
+  transition:0.3s;
+}
+nav button:hover{ transform:scale(1.05); }
+
+.page{ display:none; }
+.active{ display:block; }
+
+input{
+  padding:8px;
+  border:none;
+  border-radius:8px;
+  margin-top:10px;
+  text-align:center;
+}
+
+button.action{
+  margin-top:10px;
+  padding:8px 15px;
+  border:none;
+  border-radius:10px;
+  background:white;
+  color:#ff4e8a;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* SINGLE FORMAT MEMORIES */
+#photos{
+  display:block;
+  width:100%;
+  text-align:center;
+}
+
+#photos img{
+  display:block;
+  width:320px;
+  max-width:90%;
+  margin:25px auto;
+  aspect-ratio:5/4;
+  object-fit:cover;
+  border-radius:20px;
+  animation:floatPhoto 6s ease-in-out infinite;
+  transition:0.4s ease;
+  cursor:pointer;
+}
+
+#photos img:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 30px rgba(255,255,255,0.9);
+}
+
+@keyframes floatPhoto{
+  0%{ transform:translateY(0px); }
+  50%{ transform:translateY(-12px); }
+  100%{ transform:translateY(0px); }
+}
+
+/* Zoom Modal */
+#imageModal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.85);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  visibility:hidden;
+  transition:0.4s;
+  z-index:3000;
+}
+
+#imageModal img{
+  width:70%;
+  max-width:600px;
+  aspect-ratio:5/4;
+  object-fit:cover;
+  border-radius:20px;
+  transform:scale(0.8);
+  transition:0.4s;
+}
+
+#imageModal.active{
+  opacity:1;
+  visibility:visible;
+}
+
+#imageModal.active img{
+  transform:scale(1);
+}
+
+/* Floating Hearts */
+.heart{
+  position:fixed;
+  width:16px;
+  height:16px;
+  background:white;
+  transform:rotate(45deg);
+  box-shadow:0 0 20px white;
+  animation:floatUp linear infinite;
+}
+.heart:before,
+.heart:after{
+  content:'';
+  position:absolute;
+  width:16px;
+  height:16px;
+  background:white;
+  border-radius:50%;
+}
+.heart:before{ top:-8px; left:0; }
+.heart:after{ left:-8px; top:0; }
+
+@keyframes floatUp{
+  0%{transform:translateY(0) rotate(45deg);opacity:0;}
+  20%{opacity:1;}
+  100%{transform:translateY(-110vh) rotate(45deg);opacity:0;}
+}
+
+/* Unique Loader */
+#splash{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at center,#ff758c,#000);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+  z-index:2000;
+}
+
+.loader-ring{
+  width:120px;
+  height:120px;
+  border:6px solid rgba(255,255,255,0.2);
+  border-top:6px solid white;
+  border-radius:50%;
+  animation:spin 1.2s linear infinite;
+  margin-bottom:20px;
+}
+
+@keyframes spin{
+  to{ transform:rotate(360deg); }
+}
+
+@keyframes fadeOut{
+  to{opacity:0; visibility:hidden;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="splash">
+  <div class="loader-ring"></div>
+  <h1>🤍 Welcome Hajira Fathima 🤍</h1>
+  <p>Entering Friendship Universe...</p>
+</div>
+
+<div class="container">
+
+<div id="lockPage" class="card">
+  <h2>Enter Password 🔐</h2>
+  <input type="password" id="passwordInput" placeholder="Enter password">
+  <br>
+  <button class="action" onclick="checkPassword()">Unlock</button>
+</div>
+
+<div id="app" style="display:none;">
+
+<nav>
+  <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('gallery')">Memories</button>
+  <button onclick="showPage('dateCalc')">Date Calc</button>
+  <button onclick="showPage('liveCounter')">Live Counter</button>
+  <button onclick="showPage('message')">Message</button>
+  <button onclick="showPage('video')">Final Video</button>
+  <button onclick="showPage('music')">Music</button>
+  <button onclick="toggleTheme()">🌙</button>
+</nav>
+
+<div id="home" class="card page active">
+  <h1>Our Friendship Universe 💕</h1>
+  <p>Together Forever 🌟</p>
+</div>
+
+<div id="gallery" class="card page">
+  <h2>Memories 📸</h2>
+  <div id="photos"></div>
+</div>
+
+<div id="dateCalc" class="card page">
+  <h2>Friendship Date Calculator 📅</h2>
+  <input type="date" id="friendDate">
+  <br>
+  <button class="action" onclick="calculateDate()">Calculate</button>
+  <p id="dateResult"></p>
+</div>
+
+<div id="liveCounter" class="card page">
+  <h2>Live Love Counter ⏳</h2>
+  <p id="liveTime"></p>
+</div>
+
+<div id="message" class="card page">
+  <h2>Surprise Message 💌</h2>
+  <button class="action" onclick="generateMessage()">Generate</button>
+  <p id="msg"></p>
+</div>
+
+<div id="video" class="card page">
+  <h2>Final Video 🎬</h2>
+  <iframe width="100%" height="315"
+  src="https://pub-1407f82391df4ab1951418d04be76914.r2.dev/uploads/44ed41c0-febe-426b-be65-a0f67173e7d9.mp4"
+  frameborder="0" allowfullscreen></iframe>
+</div>
+
+<div id="music" class="card page">
+  <h2>Music 🎵</h2>
+  <audio id="bgMusic" loop>
+    <source src="https://image2url.com/r2/default/audio/1771527013663-41e46e1e-b7b9-40b4-8c15-9c724b2ef45a.mp3">
+  </audio>
+  <button class="action" onclick="toggleMusic()">Play / Pause</button>
+</div>
+
+</div>
+</div>
+
+<div id="imageModal" onclick="closeModal()">
+  <img id="modalImg">
+</div>
+
+<script>
+const PASSWORD="haji";
+
+window.addEventListener("load",()=>{
+  setTimeout(()=>{
+    document.getElementById("splash").style.animation="fadeOut 1.0s forwards";
+  },3000);
+});
+
+function checkPassword(){
+  if(document.getElementById("passwordInput").value===PASSWORD){
+    document.getElementById("lockPage").style.display="none";
+    document.getElementById("app").style.display="block";
+    document.getElementById("bgMusic").play();
+  }
+}
+
+function showPage(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+}
+
+function toggleTheme(){
+  document.body.classList.toggle("dark");
+}
+
+const photos=[
+"https://image2url.com/r2/default/images/1771524635121-3fdc68e2-2f93-4784-812e-b82ee6e7c489.jpeg",
+"https://image2url.com/r2/default/images/1771524415505-bc36e0a0-9ef7-40f9-b20c-595d69084937.jpeg",
+"https://image2url.com/r2/default/images/1771524554738-2a3d0ca7-e43e-4e7d-a78b-e9bc7ac91ccf.jpeg"
+];
+
+const photoDiv=document.getElementById("photos");
+photos.forEach(url=>{
+  const img=document.createElement("img");
+  img.src=url+"?auto=format&fit=crop&w=600&q=60";
+  img.onclick=()=>{
+    document.getElementById("modalImg").src=img.src;
+    document.getElementById("imageModal").classList.add("active");
+  };
+  photoDiv.appendChild(img);
+});
+
+function closeModal(){
+  document.getElementById("imageModal").classList.remove("active");
+}
+// Touch anywhere in Memories page to go Home
+document.getElementById("gallery").addEventListener("click", function(e){
+
+  // Don't exit if clicking on image (so zoom still works)
+  if(e.target.tagName.toLowerCase() === "img") return;
+
+  showPage('home');
+});
+
+
+
+function calculateDate(){
+  const start=new Date(document.getElementById("friendDate").value);
+  const now=new Date();
+  const days=Math.floor((now-start)/(1000*60*60*24));
+  document.getElementById("dateResult").innerText=
+  "You have been friends for "+days+" days 💖";
+}
+
+const startDate=new Date("2023-01-01");
+setInterval(()=>{
+  const now=new Date();
+  const diff=now-startDate;
+  const days=Math.floor(diff/(1000*60*60*24));
+  const hours=Math.floor((diff/(1000*60*60))%24);
+  const mins=Math.floor((diff/(1000*60))%60);
+  document.getElementById("liveTime").innerText=
+  days+" days "+hours+" hours "+mins+" minutes ❤️";
+},1000);
+
+const messages=[
+"You're my best friend forever 💖",
+"From silly laughs to serious talk😎",
+"Friendship like ours is rare 💕",
+"Together we are unstoppable 🚀",
+"no expiry.no replacement!!"
+];
+
+function generateMessage(){
+  const random=messages[Math.floor(Math.random()*messages.length)];
+  document.getElementById("msg").innerText=random;
+}
+
+function toggleMusic(){
+  const music=document.getElementById("bgMusic");
+  music.paused?music.play():music.pause();
+}
+
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(6+Math.random()*4)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),10000);
+}
+setInterval(createHeart,800);
+</script>
+
+</body>
+</html>
